@@ -14,15 +14,18 @@ node {
 
         def day = sh (script: "date +%A", returnStdout:true).toString().trim()
 
-        println day
+        def time = sh (script: "date +%R", returnStdout:true).toString().trim()
 
-        if (day == "Monday") {
+        println day
+        println time
+
+        if (day == "Monday" && time == "13:00") {
            build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'Development'), string(name: 'resourceGroup', value: '')]      
-        } else if (day == "Tuesday") {
+        } else if (day == "Monday" && time == "13:05") {
            build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'QA'), string(name: 'resourceGroup', value: '')]
-        } else if (day == "Wednesday") {
+        } else if (day == "Monday" && time == "13:10") {
            build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'Live'), string(name: 'resourceGroup', value: '')]
-        } else if (day == "Thursday") {
+        } else if (day == "Monday" && time == "13:15") {
            build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureGermanCloud'), string(name: 'azSubscription', value: 'Germany-Live'), string(name: 'resourceGroup', value: '')]
         } else {
            println "no job has been scheduled for today"
