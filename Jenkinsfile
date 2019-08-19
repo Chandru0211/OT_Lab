@@ -12,7 +12,7 @@ node {
 
     stage('Trigger elk-cluster-rolling-patch-update job') {
 
-        String day = sh (script: "date +%A")
+        def day = sh (script: "date +%A", returnStdout:true).toString().trim()
 
         println day
 
