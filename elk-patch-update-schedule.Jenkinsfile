@@ -13,7 +13,7 @@ node {
 
         def day = sh (script: "date +%A", returnStdout:true).toString().trim()
 
-        if (day == "Monday") {  
+        if (day == "Thursday") {  
            build job: 'elk-cluster-rolling-patch-update', parameters: [
                 [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'Development'), string(name: 'resourceGroup', value: 'elk-eastus-dev-rg')],
                 [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'QA'), string(name: 'resourceGroup', value: 'elk-eastus-qa-rg')]
