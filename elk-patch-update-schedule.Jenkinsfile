@@ -13,13 +13,13 @@ node {
 
         def day = sh (script: "date +%A", returnStdout:true).toString().trim()
 
-        if (day == "Thursday") {  
+        if (day == "Monday") {  
            parallel 'Dev': { 
                 build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'Development'), string(name: 'resourceGroup', value: 'elk-eastus-dev-rg')]
             }, 'QA': { 
                 build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'QA'), string(name: 'resourceGroup', value: 'elk-eastus-qa-rg')]
             }
-        } else if (day == "Wednesday") {
+        } else if (day == "Thursday") {
            parallel 'Live': { 
                 build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'Live'), string(name: 'resourceGroup', value: 'elk-centralus-prod-rg')]
             }, 'Germany-Live': { 
