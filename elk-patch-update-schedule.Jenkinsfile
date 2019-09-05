@@ -24,7 +24,11 @@ node {
                 build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'Live'), string(name: 'resourceGroup', value: 'elk-centralus-prod-rg')]
             }, 'Germany-Live': { 
                 build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureGermanCloud'), string(name: 'azSubscription', value: 'Germany-Live'), string(name: 'resourceGroup', value: 'elk-germanycentral-prod-rg')]
-           }
+            }, 'Security': { 
+                build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureGermanCloud'), string(name: 'azSubscription', value: 'Security'), string(name: 'resourceGroup', value: 'wazuh-eastus-security-rg')]
+            }, 'Wazuh-Germany-Live': { 
+                build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureGermanCloud'), string(name: 'azSubscription', value: 'Germany-Live'), string(name: 'resourceGroup', value: 'wazuh-germanycentral-prod-rg')]
+            }
         } else {
            println "no job has been scheduled for today"
         }
