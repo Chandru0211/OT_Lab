@@ -15,17 +15,11 @@ node {
 
         if (day == "Thursday") {  
            parallel 'one': { 
-                build job: 'elk-cluster-rolling-patch-update', 
-                    parameters: [
-                        [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'Development'), string(name: 'resourceGroup', value: 'elk-eastus-dev-rg')]
-                    ],
+                build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'Development'), string(name: 'resourceGroup', value: 'elk-eastus-dev-rg')],
                     propagate: false,
                     wait: true
             }, 'two': { 
-                build job: 'elk-cluster-rolling-patch-update', 
-                    parameters: [ 
-                        [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'QA'), string(name: 'resourceGroup', value: 'elk-eastus-qa-rg')]
-                    ],
+                build job: 'elk-cluster-rolling-patch-update', parameters: [string(name: 'azCloud', value: 'AzureCloud'), string(name: 'azSubscription', value: 'QA'), string(name: 'resourceGroup', value: 'elk-eastus-qa-rg')],
                     propagate: false,
                     wait: true
             }
